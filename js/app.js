@@ -22,38 +22,39 @@ function getNews() {
 const paintResults = response => {
     let output = ``;
 
-    response.forEach(element => {
+    response.forEach((element, index) => {
+        if (index < 5) {
+            const title = element.headline.main;
+            const snippet = element.snippet;
+            const urlImage = element.multimedia[15].url;
+            const imageNews = `https://www.nytimes.com/${urlImage}`;
+            const newsUrl = element.web_url;
 
-        const title = element.headline.main;
-        const snippet = element.snippet;        
-        const urlImage = element.multimedia[15].url;
-        const imageNews = `https://www.nytimes.com/${urlImage}`;
-        const newsUrl = element.web_url;
-
-        output += `
-         <div class="row">
-                <div>
-                    <h5 class="header">${title}</h5>
-                    <div class="card horizontal">
-                        <div class="card-image">
-                            <img src="${imageNews}" alt="imageNews">
-                        </div>
-                        <div class="card-stacked">
-                            <div class="card-content">
-                                <p>${snippet}</p>
-                            </div>
-                            <div class="card-action">
-                                <a href="${newsUrl}" target="_blank">Here you can read the complete news</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `
-
+            output += `
+                <div class="row">
+                       <div>
+                           <h5 class="header">${title}</h5>
+                           <div class="card horizontal">
+                               <div class="card-image">
+                                   <img src="${imageNews}" alt="imageNews">
+                               </div>
+                               <div class="card-stacked">
+                                   <div class="card-content">
+                                       <p>${snippet}</p>
+                                   </div>
+                                   <div class="card-action">
+                                       <a href="${newsUrl}" target="_blank">Here you can read the complete news</a>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               `
+        }
     });
     responseContainer.innerHTML = output;
 }
+
 
 function addNews() {
     const data = JSON.parse(this.responseText);
