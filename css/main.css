@@ -1,0 +1,11 @@
+nav {
+    background-color: #3f51b5;
+}
+
+label {
+    left: inherit !important;
+}
+
+.container-fluid {
+    width: 100%;
+}
